@@ -31,18 +31,18 @@ Quick Start
 -----------
 
 1. Create a `bitcoind-data` volume to persist the bitcoind blockchain data, should exit immediately.  The `bitcoind-data` container will store the blockchain when the node container is recreated (software upgrade, reboot, etc):
-
+        docker build -t wanchain/bitcoind:0.21.1 .
         docker volume create --name=bitcoind-data
         docker run -v bitcoind-data:/bitcoin/.bitcoin --name=bitcoind-node -d \
             -p 8333:8333 \
             -p 127.0.0.1:8332:8332 \
-            kylemanna/bitcoind
+            wanchain/bitcoind:0.21.1
 
 2. Verify that the container is running and bitcoind node is downloading the blockchain
 
         $ docker ps
         CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                              NAMES
-        d0e1076b2dca        kylemanna/bitcoind:latest     "btc_oneshot"       2 seconds ago       Up 1 seconds        127.0.0.1:8332->8332/tcp, 0.0.0.0:8333->8333/tcp   bitcoind-node
+        d0e1076b2dca        wanchain/bitcoind:0.21.1     "btc_oneshot"       2 seconds ago       Up 1 seconds        127.0.0.1:8332->8332/tcp, 0.0.0.0:8333->8333/tcp   bitcoind-node
 
 3. You can then access the daemon's output thanks to the [docker logs command]( https://docs.docker.com/reference/commandline/cli/#logs)
 
